@@ -15,31 +15,117 @@ topLeftY = sHeight - playHeight
 
 # Shape Formats
 
-S = [[
-    '.....',
-    '.....',
-    '..00.',
-    '.00..',
-    '.....'],
-    ['.....',
-    '..0..',
-    '..00.',
-    '...0.',
-    '.....']]
-Z = []
-I = []
-O = []
-J = []
-L = []
-T = []
+S = [['.....',
+      '.....',
+      '..00.',
+      '.00..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '...0.',
+      '.....']]
+
+Z = [['.....',
+      '.....',
+      '.00..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '.0...',
+      '.....']]
+
+I = [['..0..',
+      '..0..',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '0000.',
+      '.....',
+      '.....',
+      '.....']]
+
+O = [['.....',
+      '.....',
+      '.00..',
+      '.00..',
+      '.....']]
+
+J = [['.....',
+      '.0...',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..00.',
+      '..0..',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '...0.',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '.00..',
+      '.....']]
+
+L = [['.....',
+      '...0.',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..0..',
+      '..00.',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '.0...',
+      '.....'],
+     ['.....',
+      '.00..',
+      '..0..',
+      '..0..',
+      '.....']]
+
+T = [['.....',
+      '..0..',
+      '.000.',
+      '.....',
+      '.....'],
+     ['.....',
+      '..0..',
+      '..00.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '.....',
+      '.000.',
+      '..0..',
+      '.....'],
+     ['.....',
+      '..0..',
+      '.00..',
+      '..0..',
+      '.....']]
 
 shapes = [S, Z, I, O, J, L, T]
-shapeColors =[(0,255,0),(255,0,0),(0,255,255),(255,255,0),(255,165,0),(0,0,255),(128,0,128)]
+shapeColors = [(0, 255, 0), (255, 0, 0), (0, 255, 255),
+               (255, 255, 0), (255, 165, 0), (0, 0, 255), (128, 0, 128)]
+
 
 class Piece(object):
     rows = 20
     columns = 10
-    
+
     def __init__(self, x, y, shape):
         self.x = x
         self.y = y
@@ -47,8 +133,9 @@ class Piece(object):
         self.color = shapeColors[shapes.index(shape)]
         self.rotation = 0
 
-def createGrid(locked_pos = {}):
-    grid = [[(0,0,0) for _ in range(10)] for _ in range(20)]
+
+def createGrid(locked_pos={}):
+    grid = [[(0, 0, 0) for _ in range(10)] for _ in range(20)]
 
     for i in range(len(grid)):
         for j in range(len(grid[i])):
@@ -57,52 +144,65 @@ def createGrid(locked_pos = {}):
                 grid[i][j] = c
     return grid
 
+
 def convertShapeFormat():
     pass
+
 
 def validSpace():
     pass
 
+
 def checkLost():
     pass
+
 
 def getShape():
     return Piece(5, 0, random.choice(shapes))
 
+
 def drawTextMiddle():
     pass
+
 
 def drawGrid(surface, grid):
     sx = topLeftX
     sy = topLeftY
 
     for i in range(len(grid)):
-        pygame.draw.line(surface, (128,128,128), (sx, sy + i*blockSize), (sx + playWidth, sy + i*blockSize))
+        pygame.draw.line(surface, (128, 128, 128), (sx, sy +
+                                                    i*blockSize), (sx + playWidth, sy + i*blockSize))
         for j in range(len(grid[i])):
-            pygame.draw.line(surface, (128,128,128), (sx + j*blockSize, sy), (sx + j*blockSize, sy + playHeight))            
+            pygame.draw.line(surface, (128, 128, 128), (sx + j *
+                                                        blockSize, sy), (sx + j*blockSize, sy + playHeight))
 
 
 def clearRows():
     pass
 
+
 def drawNextShape():
     pass
 
+
 def drawWindow(surface, grid):
-    surface.fill((0,0,0))
+    surface.fill((0, 0, 0))
     pygame.font.init()
     font = pygame.font.SysFont("comicsans", 60)
-    label = font.render("Tetris", 1, (255,255,255))
+    label = font.render("Tetris", 1, (255, 255, 255))
 
     surface.blit(label, (topLeftX + playWidth/2 - (label.get_width()/2), 30))
 
     for i in range(len(grid)):
         for j in range(len(grid[i])):
-            pygame.draw.rect(surface, grid[i][j], (topLeftX + j*blockSize, topLeftY + i*blockSize, blockSize, blockSize), 0)
-        
-    pygame.draw.rect(surface,(255, 0, 0), (topLeftX, topLeftY, playWidth, playHeight), 4)
+            pygame.draw.rect(
+                surface, grid[i][j], (topLeftX + j*blockSize, topLeftY + i*blockSize, blockSize, blockSize), 0)
+
+    pygame.draw.rect(surface, (255, 0, 0), (topLeftX,
+                                            topLeftY, playWidth, playHeight), 4)
     drawGrid(surface, grid)
     pygame.display.update()
+
 
 def main(win):
     lockedPosition = {}
@@ -137,8 +237,10 @@ def main(win):
                         currentPiece.rotation -= 1
     drawWindow(win, grid)
 
+
 def mainMenu(win):
     main(win)
+
 
 win = pygame.display.set_mode((sWidth, sHeight))
 pygame.display.set_pation("Tetris")
