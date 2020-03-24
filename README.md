@@ -15,6 +15,8 @@ To run the game enter the following code in the terminal.
 
 `python3 tetris.py`
 
-
+To play use the left/right arrow keys to move. The up arrow key will rotate the piece. The down arrow key will lower the piece down further. The game keeps track of the score for each row complete and will maintain you highest score. See how high you can get your score.
 
 ### Have Fun
+
+![TetrisDemo](demo.gif)
